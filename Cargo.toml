@@ -11,4 +11,3 @@ libc = "0.2"
 
 [build-dependencies]
 cmake = "0.1.44"
-lazy_static = "1.4.0"

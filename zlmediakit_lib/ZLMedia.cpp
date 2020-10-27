@@ -2,6 +2,8 @@
 
 int ZLMedia::init()
 {
+    std::cout << "init player" << std::endl;
+
     weak_ptr<MediaPlayer> weakPlayer = player;
     player->setOnPlayResult([weakPlayer, this](const SockException &ex) {
         //this->LOG << "OnPlayResult: " << ex.what() << " for " << this->uri;
@@ -29,7 +31,7 @@ int ZLMedia::init()
     });
 
     player->setOnShutdown([this](const SockException &ex) {
-
+        std::cout << "shutdown player" << std::endl;
     });
     return 0;
 }

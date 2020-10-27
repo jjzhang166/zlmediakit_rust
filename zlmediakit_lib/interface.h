@@ -28,6 +28,9 @@ extern "C"
     void zlmedia_init(ZLMediaInstance* zl_media) {
         ((ZLMedia *)zl_media)->init();
     }
+    void zlmedia_run(ZLMediaInstance* zl_media) {
+        ((ZLMedia *)zl_media)->run();
+    }
     void cppDeleteArray(uint8_t *data)
     {
         delete[] data;

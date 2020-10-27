@@ -17,7 +17,7 @@ enum Transport
 class ZLMedia
 {
 public:
-    ZLMedia(std::string ur)
+    ZLMedia(std::string uri)
     {
         this->uri = uri;
         //this->zl_media_instance = zl_media_instance;
@@ -38,16 +38,33 @@ public:
 
     void run()
     {
-        init();
         if (transport == RTP_OVER_TCP)
         {
             (*player)[Client::kRtpType] = Rtsp::RTP_TCP;
+            player->play(uri);
+        }
+        else if (transport == RTP_OVER_HTTP)
+        {
+            //(*player)[Client::kRtpType] = Rtsp::RTP_HTTP;
+            //player->play(uri);
+            std::cout << "unsupported transport" << std::endl;
+            std::exit(1);
+        }
+        else if (transport == RTP_OVER_UDP)
+        {
+            (*player)[Client::kRtpType] = Rtsp::RTP_UDP;
+            player->play(uri);
+        }
+        else if (transport == RTP_OVER_UDP_MULTICAST)
+        {
+            (*player)[Client::kRtpType] = Rtsp::RTP_MULTICAST;
             player->play(uri);
         }
         else
         {
             std::cout << "UNRECOGNIZED PLAY TYPE FOR RTSP" << std::endl;
         }
+        //std::cout << "running for " << uri << std::endl;
     };
 
     int receivePacket()

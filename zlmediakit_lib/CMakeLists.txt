@@ -8,7 +8,7 @@ set(ENABLE_TESTS OFF FORCE)
 option(ENABLE_TESTS OFF)
 #No openssl for ZLMediaKit for now, because it uses 1.1-dev and ubuntu bionic only has 1.0-dev
 #TODO: enable OpenSSL since we're building in openvpn3 
-set(ENABLE_OPENSSL FALSE FORCE)
+set(ENABLE_OPENSSL OFF FORCE)
 option(ENABLE_OPENSSL OFF)
 
 add_subdirectory(ZLMediaKit)
@@ -20,4 +20,4 @@ ${CMAKE_CURRENT_SOURCE_DIR}/ZLMediaKit/src
 ${CMAKE_CURRENT_SOURCE_DIR}/ZLMediaKit/3rdpart/ZLToolKit/src)
 target_link_libraries(zlmediakit_cpp_interface mpeg mov flv libstdc++ zlmediakit zltoolkit)
 #install(TARGETS zlmediakit zltoolkit mpeg mov flv DESTINATION .)
-install(TARGETS zlmediakit_cpp_interface DESTINATION .)
+install(TARGETS zlmediakit_cpp_interface zltoolkit zlmediakit mpeg mov flv DESTINATION .)
