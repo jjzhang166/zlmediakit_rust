@@ -14,23 +14,31 @@ extern "C"
     {
         return ((ZLMediaInstance *)new ZLMedia(url));
     }
-    void zlmedia_set_on_produce(ZLMediaInstance *zl_media, OnProduce on_produce)
+    void zlmedia_set_parent(ZLMediaInstance *zLMediaInstance, ZLMedia *zl_media)
     {
-        ((ZLMedia *)zl_media)->set_on_produce(on_produce);
+        ((ZLMedia *)zLMediaInstance)->set_parent(zl_media);
     }
-    void zlmedia_set_transport(ZLMediaInstance *zl_media, int transport)
+    void zlmedia_set_on_produce(ZLMediaInstance *zLMediaInstance, OnProduce on_produce)
     {
-        ((ZLMedia *)zl_media)->set_transport((Transport)transport);
+        ((ZLMedia *)zLMediaInstance)->set_on_produce(on_produce);
     }
-    void zlmedia_destroy(ZLMediaInstance* zl_media) {
-        delete ((ZLMedia *)zl_media);
+    void zlmedia_set_transport(ZLMediaInstance *zLMediaInstance, int transport)
+    {
+        ((ZLMedia *)zLMediaInstance)->set_transport((Transport)transport);
     }
-    void zlmedia_init(ZLMediaInstance* zl_media) {
-        ((ZLMedia *)zl_media)->init();
+    void zlmedia_destroy(ZLMediaInstance *zLMediaInstance)
+    {
+        delete ((ZLMedia *)zLMediaInstance);
     }
-    void zlmedia_run(ZLMediaInstance* zl_media) {
-        ((ZLMedia *)zl_media)->run();
+    void zlmedia_init(ZLMediaInstance *zLMediaInstance)
+    {
+        ((ZLMedia *)zLMediaInstance)->init();
     }
+    void zlmedia_run(ZLMediaInstance *zLMediaInstance)
+    {
+        ((ZLMedia *)zLMediaInstance)->run();
+    }
+    /*
     void cppDeleteArray(uint8_t *data)
     {
         delete[] data;
@@ -39,5 +47,6 @@ extern "C"
     {
         delete data;
     }
+    */
 }
 #endif //LIBZLMEDIAKIT_RUST_INTERFACE

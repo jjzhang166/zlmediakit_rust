@@ -22,7 +22,7 @@ int ZLMedia::init()
         }
         videoTrack->addDelegate(std::make_shared<FrameWriterInterfaceHelper>([this](const Frame::Ptr &frame) {    
             //onProduce(zLRTSPEncodedPacket);
-            this->on_produce((ZLMediaInstance *)this, reinterpret_cast<uint8_t*>(frame->data()), frame->size());
+            this->on_produce(this->zlmedia, reinterpret_cast<uint8_t*>(frame->data()), frame->size());
         }));
     });
 

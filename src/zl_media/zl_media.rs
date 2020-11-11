@@ -1,4 +1,5 @@
 use crate::interface::interface::*;
+use libc::size_t;
 use std::ffi::CString;
 
 pub struct ZLMedia {
@@ -21,6 +22,31 @@ impl ZLMedia {
 
     pub fn set_transport(&self, transport: Transport) {
         unsafe { zlmedia_set_transport(self.zl_media, transport as libc::c_int) }
+    }
+
+    pub fn socket_send(&self, data: *mut u8, size: size_t) -> u8 {
+        0
+    }
+
+    pub fn socket_connect(&self, address: *mut u8, local_port: u16, port: u16) -> u8 {
+        0
+    }
+
+    pub fn socket_may_send(&self) -> bool {
+        true
+    }
+
+    pub fn socket_receive(&self, data: *mut u8, size: *mut size_t) -> u8 {
+        0
+    }
+
+    pub fn socket_receive_allocate(
+        &self, 
+        data: *mut u8,
+        size: *mut size_t,
+        allocate_function: AllocateFunction,
+    ) -> u8 {
+        0
     }
 
     pub fn init(&self) {

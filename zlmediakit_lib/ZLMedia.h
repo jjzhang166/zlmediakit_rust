@@ -1,10 +1,12 @@
 #ifndef LIBZLMEDIA_RUST_INTERFACE_H
 #define LIBZLMEDIA_RUST_INTERFACE_H
 #include "Player/MediaPlayer.h"
+#include "CustomSocket.h"
 #include <stdint.h>
 
 struct ZLMediaInstance;
-typedef void (*OnProduce)(ZLMediaInstance *, uint8_t *, size_t);
+struct ZLMedia;
+typedef void (*OnProduce)(ZLMedia *, uint8_t *, size_t);
 
 enum Transport
 {
@@ -24,6 +26,10 @@ public:
         player = std::make_shared<MediaPlayer>();
     }
 
+    void set_parent(ZLMedia* zlmedia) {
+        this->zlmedia = zlmedia;
+    }
+
     void set_transport(Transport transport)
     {
         this->transport = transport;
@@ -32,6 +38,14 @@ public:
     void set_on_produce(OnProduce on_produce)
     {
         this->on_produce = on_produce;
+    }
+
+    void set_socket(SocketInstance * socketInstance) {
+        Socket::onCreateSocket onCreateSocket = [socketInstance](const EventPoller::Ptr &poller) -> Socket::Ptr {
+            auto socketPtr = std::make_shared<CustomSocket>(poller, socketInstance);
+            return socketPtr;
+        };
+        player->setOnCreateSocket(onCreateSocket);
     }
 
     int init();
@@ -74,6 +88,7 @@ public:
 
 private:
     //ZLMediaInstance *zl_media_instance;
+    ZLMedia* zlmedia;
     MediaPlayer::Ptr player;
     Transport transport;
     OnProduce on_produce;

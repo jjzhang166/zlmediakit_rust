@@ -13,7 +13,7 @@ option(ENABLE_OPENSSL OFF)
 
 add_subdirectory(ZLMediaKit)
 
-add_library(zlmediakit_cpp_interface STATIC interface.cpp ZLMedia.cpp)
+add_library(zlmediakit_cpp_interface STATIC interface.cpp ZLMedia.cpp CustomSocket.cpp)
 target_include_directories(zlmediakit_cpp_interface PUBLIC 
 . 
 ${CMAKE_CURRENT_SOURCE_DIR}/ZLMediaKit/src 
